@@ -16,5 +16,9 @@
     "probuilder",
     "vrchat"
   ],
-  "dependencies": {}
+  "dependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LogicCuteGuy/BlendProperty.git"
+  }
 }

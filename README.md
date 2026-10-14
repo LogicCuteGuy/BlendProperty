@@ -6,7 +6,7 @@ Blender-style modifiers for Unity meshes, as editor-only components.
 
 ![Modifier stack in the Inspector](Documentation~/images/editor-stack.png)
 
-- **Install:** Package Manager → **Add package from git URL…**, or copy this folder into `Packages/`. Needs Unity 2022.3+.
+- **Install:** Package Manager → **+** → **Add package from git URL…** → `https://github.com/LogicCuteGuy/BlendProperty.git`, or copy this repo into `Packages/`. Needs Unity 2022.3+.
 - **Examples** in `Packages/Blend Property/Example/`:
   - `BlendPropertyExample.unity` shows eight modifier stacks.
   - `VRChat/BlendPropertyVRChatExample.unity`: runtime motion in a VRChat world (Udon deformers and the Wave shader). Press Play.

@@ -8,7 +8,8 @@ Blend Property brings Blender's modifier stack to Unity. Each modifier is a comp
 
 Use either method:
 
-- **Package Manager → + → Add package from git URL…** and enter the repository URL.
+- **Package Manager → + → Add package from git URL…** and enter `https://github.com/LogicCuteGuy/BlendProperty.git`.
+  To pin a version, append a tag, for example `#v0.1.0`.
 - Copy the `com.logiccuteguy.blendproperty` folder into your project's `Packages/` folder.
 
 The package needs Unity 2022.3 or newer. If ProBuilder is installed, the ProBuilder bridge turns on automatically.
