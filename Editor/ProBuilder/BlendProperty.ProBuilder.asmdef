@@ -1,0 +1,16 @@
+{
+    "name": "BlendProperty.ProBuilder",
+    "rootNamespace": "BlendProperty.Editor",
+    "references": ["BlendProperty", "BlendProperty.Editor", "Unity.ProBuilder", "Unity.ProBuilder.Editor"],
+    "includePlatforms": ["Editor"],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": ["BLEND_PROBUILDER"],
+    "versionDefines": [
+        { "name": "com.unity.probuilder", "expression": "5.0.0", "define": "BLEND_PROBUILDER" }
+    ],
+    "noEngineReferences": false
+}

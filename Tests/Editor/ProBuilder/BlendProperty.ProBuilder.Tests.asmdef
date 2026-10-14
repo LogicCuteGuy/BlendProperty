@@ -1,0 +1,15 @@
+{
+    "name": "BlendProperty.ProBuilder.Tests",
+    "references": ["BlendProperty", "BlendProperty.Editor", "Unity.ProBuilder", "UnityEngine.TestRunner", "UnityEditor.TestRunner"],
+    "includePlatforms": ["Editor"],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": ["nunit.framework.dll"],
+    "autoReferenced": false,
+    "defineConstraints": ["UNITY_INCLUDE_TESTS", "BLEND_PROBUILDER"],
+    "versionDefines": [
+        { "name": "com.unity.probuilder", "expression": "5.0.0", "define": "BLEND_PROBUILDER" }
+    ],
+    "noEngineReferences": false
+}

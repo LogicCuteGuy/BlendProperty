@@ -1,0 +1,16 @@
+{
+    "name": "BlendProperty.Editor",
+    "rootNamespace": "BlendProperty.Editor",
+    "references": ["BlendProperty"],
+    "includePlatforms": ["Editor"],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [
+        { "name": "com.vrchat.base", "expression": "", "define": "BLEND_VRC" }
+    ],
+    "noEngineReferences": false
+}

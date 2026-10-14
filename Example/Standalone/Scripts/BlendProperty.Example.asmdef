@@ -1,0 +1,10 @@
+{
+    "name": "BlendProperty.Example",
+    "rootNamespace": "BlendProperty.Example",
+    "references": ["BlendProperty"],
+    "autoReferenced": false,
+    "defineConstraints": ["!BLEND_VRC"],
+    "versionDefines": [
+        { "name": "com.vrchat.base", "expression": "", "define": "BLEND_VRC" }
+    ]
+}
