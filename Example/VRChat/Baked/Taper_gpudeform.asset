@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Bounds
-  m_Shader: {fileID: 4800000, guid: 43c6b03b1caefb1479ba921010046865, type: 3}
+  m_Shader: {fileID: 4800000, guid: af015d16c4d1c5548a18c122c972ccee, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -99,7 +99,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Deform
-  m_Shader: {fileID: 4800000, guid: 43c6b03b1caefb1479ba921010046865, type: 3}
+  m_Shader: {fileID: 4800000, guid: af015d16c4d1c5548a18c122c972ccee, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []

@@ -40,6 +40,31 @@ namespace BlendProperty.Tests
         static object Get(Component c, string field) { return c.GetType().GetField(field, Fields).GetValue(c); }
         static void Call(Component c, string method) { c.GetType().GetMethod(method, Fields).Invoke(c, null); }
 
+        [TestCase("Bend")]
+        [TestCase("Lattice")]
+        [TestCase("Stretch")]
+        [TestCase("Taper")]
+        [TestCase("Twist")]
+        [TestCase("Wave")]
+        [TestCase("WaveHD")]
+        public void ExampleDeformTexturesReferenceStackShader(string name)
+        {
+            const string root = "Packages/com.logiccuteguy.blendproperty/";
+            var shader = AssetDatabase.LoadAssetAtPath<Shader>(root + "Runtime/Shaders/Simulation/BlendDeformStackGPU.shader");
+            Assert.IsNotNull(shader);
+            int textures = 0;
+            foreach (var asset in AssetDatabase.LoadAllAssetsAtPath(root + "Example/VRChat/Baked/" + name + "_gpudeform.asset"))
+            {
+                var texture = asset as CustomRenderTexture;
+                if (texture == null) continue;
+                Assert.IsNotNull(texture.material, texture.name);
+                Assert.AreSame(shader, texture.material.shader, texture.name);
+                Assert.Less(texture.shaderPass, texture.material.passCount, texture.name);
+                textures++;
+            }
+            Assert.AreEqual(2, textures);
+        }
+
         [Test]
         public void DeformRetainsMaterialsForWorldExport()
         {
@@ -113,5 +138,22 @@ namespace BlendProperty.Tests
             Assert.AreEqual(0.75f, slider.value);
             Assert.AreEqual(false, Get(synced, "pulling"));
         }
+
+#if BLEND_UDON
+        [TestCase("BlendUdonPanel")]
+        [TestCase("BlendUdonClothPanel")]
+        public void LocalPanelCanShareObjectWithSyncedPanel(string name)
+        {
+            var panel = Add(name);
+            var synced = Add("BlendUdonSyncedPanel");
+            var attributeType = Type.GetType("UdonSharp.UdonBehaviourSyncModeAttribute, UdonSharp.Runtime", true);
+            var mode = attributeType.GetField("behaviourSyncMode");
+            Assert.AreEqual("NoVariableSync", mode.GetValue(Attribute.GetCustomAttribute(panel.GetType(), attributeType)).ToString());
+            Assert.AreEqual("Manual", mode.GetValue(Attribute.GetCustomAttribute(synced.GetType(), attributeType)).ToString());
+            var program = AssetDatabase.LoadMainAssetAtPath("Packages/com.logiccuteguy.blendproperty/Udon/Interaction/" + name + ".asset");
+            Assert.IsNotNull(program);
+            Assert.AreEqual("NoVariableSync", program.GetType().GetField("behaviourSyncMode").GetValue(program).ToString());
+        }
+#endif
     }
 }

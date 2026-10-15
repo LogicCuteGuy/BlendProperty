@@ -18,7 +18,7 @@ namespace BlendProperty.Udon
     /// Hook Toggle / Slider On Value Changed → SendCustomEvent "Apply".
     /// A Text inside a Slider shows the Slider's name and value. Local only (not synced).
     /// </summary>
-    [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
+    [UdonBehaviourSyncMode(BehaviourSyncMode.NoVariableSync)]
     [Icon("Packages/com.logiccuteguy.blendproperty/Editor/Icons/Physics/ControlPanel.png")]
     [AddComponentMenu("Blend Property/Physics/Interaction/Control Panel")]
     public class BlendUdonPanel : UdonSharpBehaviour

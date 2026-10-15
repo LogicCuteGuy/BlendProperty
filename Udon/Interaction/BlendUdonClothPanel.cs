@@ -15,7 +15,7 @@ namespace BlendProperty.Udon
     /// Button On Click → SendCustomEvent "ResetCloth". Any control left empty is skipped. A Text inside a slider
     /// shows its name and value. Local only (not synced).
     /// </summary>
-    [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
+    [UdonBehaviourSyncMode(BehaviourSyncMode.NoVariableSync)]
     [Icon("Packages/com.logiccuteguy.blendproperty/Editor/Icons/Physics/ClothPanel.png")]
     [AddComponentMenu("Blend Property/Physics/Interaction/Cloth Panel")]
     public class BlendUdonClothPanel : UdonSharpBehaviour
