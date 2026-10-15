@@ -6,7 +6,7 @@ Blender-style modifiers and runtime physics for Unity meshes, in standalone game
 
 ![Modifier stack in the Inspector](Documentation~/images/editor-stack.png)
 
-- **Install:** Package Manager → **+** → **Add package from git URL…** → `https://github.com/LogicCuteGuy/BlendProperty.git`, or copy this repo into `Packages/`. Needs Unity 2022.3+.
+- **Install:** supports VCC / ALCOM, Unity Package Manager and manual installation. Needs Unity 2022.3+. See [Installation](#installation).
 - **Examples** in `Packages/Blend Property/Example/`:
   - `BlendPropertyExample.unity` shows ten modifier stacks (two follow a Unity Splines path).
   - `VRChat/BlendPropertyVRChatExample.unity`: runtime motion in a VRChat world (Udon deformers and the Wave and Ocean shaders). Press Play.
@@ -15,6 +15,21 @@ Blender-style modifiers and runtime physics for Unity meshes, in standalone game
   - `Standalone/BlendPropertyStandaloneExample.unity`: `RebuildNow()` in a non-VRChat project. Press Play.
 - **Guide:** [Documentation~/BlendProperty.md](Documentation~/BlendProperty.md) covers a walkthrough, Lattice setup, builds and troubleshooting.
 - **Screenshot tutorials:** [all modifiers](Documentation~/IllustratedModifiers.md), [all runtime stations](Documentation~/IllustratedRuntime.md), and [physics, interaction and editor workflow](Documentation~/IllustratedWorkflow.md). Each includes settings, actions, expected results and full-size Unity Editor screenshots.
+
+## Installation
+
+### VCC / ALCOM
+
+1. [Add the LogicCuteGuy VPM repository](https://vpm.logiccuteguy.com/) to VCC / ALCOM. You can also add `https://vpm.logiccuteguy.com/index.json` manually in the app's repository settings.
+2. Open **Manage Project** for your Unity project and enable the LogicCuteGuy repository if needed.
+3. Find **Blend Property** (`com.logiccuteguy.blendproperty`) and add the latest available version to the project.
+4. Open the project in Unity and let the package import.
+
+### Unity Package Manager / manual
+
+In Unity, open **Window → Package Manager → + → Add package from git URL…** and enter `https://github.com/LogicCuteGuy/BlendProperty.git`.
+
+Alternatively, download the `com.logiccuteguy.blendproperty-<version>.zip` package asset from [GitHub Releases](https://github.com/LogicCuteGuy/BlendProperty/releases) and extract it into `Packages/com.logiccuteguy.blendproperty/`, with `package.json` directly inside that folder. Choose one installation method per project to avoid duplicate copies.
 
 ## Use
 - Select any object with a MeshFilter (an FBX child, a primitive or a ProBuilder mesh), then choose **Add Component → Blend Property → Modifiers → …**
