@@ -5,7 +5,7 @@ namespace BlendProperty
 {
     /// <summary>Blender Normal Edit: point normals away from a center (Radial) or toward a target (Directional).</summary>
     [Icon("Packages/com.logiccuteguy.blendproperty/Editor/Icons/NormalEdit.png")]
-    [AddComponentMenu("Blend Modifier/Normals/Normal Edit")]
+    [AddComponentMenu("Blend Property/Modifiers/Normals/Normal Edit")]
     public class NormalEditModifier : BlendModifier
     {
         public enum Mode { Radial, Directional }

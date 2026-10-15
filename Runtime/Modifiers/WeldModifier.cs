@@ -3,7 +3,7 @@ using UnityEngine;
 namespace BlendProperty
 {
     [Icon("Packages/com.logiccuteguy.blendproperty/Editor/Icons/Weld.png")]
-    [AddComponentMenu("Blend Modifier/Generate/Weld")]
+    [AddComponentMenu("Blend Property/Modifiers/Generate/Weld")]
     public class WeldModifier : BlendModifier
     {
         public enum Mode { All, Connected }

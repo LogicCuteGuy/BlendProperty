@@ -3,7 +3,7 @@ using UnityEngine;
 namespace BlendProperty
 {
     [Icon("Packages/com.logiccuteguy.blendproperty/Editor/Icons/Smooth.png")]
-    [AddComponentMenu("Blend Modifier/Deform/Smooth")]
+    [AddComponentMenu("Blend Property/Modifiers/Deform/Smooth")]
     public class SmoothModifier : BlendModifier
     {
         public bool x = true, y = true, z = true;

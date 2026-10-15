@@ -8,7 +8,7 @@ namespace BlendProperty
     /// with optional alignment, randomization and merging. Count includes the original.
     /// </summary>
     [Icon("Packages/com.logiccuteguy.blendproperty/Editor/Icons/Array.png")]
-    [AddComponentMenu("Blend Modifier/Generate/Array")]
+    [AddComponentMenu("Blend Property/Modifiers/Generate/Array")]
     public class ArrayModifier : BlendModifier
     {
         public enum Shape { Line, Circle, Curve, Transform }
@@ -50,6 +50,10 @@ namespace BlendProperty
         [Tooltip("Curve: path through these Transforms (Catmull-Rom), like the Curve modifier.")]
         public Transform[] curvePoints = new Transform[0];
         public bool closedCurve;
+#if BLEND_SPLINES
+        [Tooltip("Curve: Unity Splines path (first spline of the container). Overrides Curve Points; Closed comes from the spline.")]
+        public UnityEngine.Splines.SplineContainer curveSpline;
+#endif
 
         // Transform
         public TransformReference transformReference = TransformReference.Object;
@@ -76,22 +80,47 @@ namespace BlendProperty
         public bool excludeFirst, excludeLast;
         public int seed;
 
+        [Tooltip("Each copy after the first is its own child GameObject (\"Array Copy N\") sharing this object's final mesh, " +
+                 "instead of one merged mesh. Modifiers after this one apply to every copy alike. Merge is ignored.")]
+        public bool splitCopies;
+
         public bool merge;
         [Min(0)] public float mergeDistance = 0.001f;
+
+        [Tooltip("Keep one child BoxCollider per copy, sized to the input mesh, so a Rigidbody on this object gets a " +
+                 "compound collider in the array's shape (a MeshCollider on a moving Rigidbody has to be convex). " +
+                 "Ignores modifiers after this one.")]
+        public bool colliderPerCopy;
+        [Tooltip("Physic material for the per-copy colliders. Lower friction than default if a field should spin the whole array.")]
+        public PhysicMaterial colliderMaterial;
 
         public override IEnumerable<Object> Dependencies()
         {
             if (shape == Shape.Transform && transformReference == TransformReference.Object && transformObject) yield return transformObject;
+#if BLEND_SPLINES
+            if (shape == Shape.Curve && curveSpline) { yield return curveSpline; yield break; }
+#endif
             if (shape == Shape.Curve && curvePoints != null) foreach (var p in curvePoints) if (p) yield return p;
         }
 
         public override void Apply(MeshData mesh)
         {
-            var xf = Transforms(mesh.GetBounds());
-            if (xf.Count == 0) return;
+            var bounds = mesh.GetBounds();
+            var xf = Transforms(bounds);
             Randomize(xf);
+            SyncColliders(colliderPerCopy ? xf : null, bounds);
+            splitXf = new List<Matrix4x4>();
+            if (xf.Count == 0) return;
             var src = mesh.Clone();
             mesh.pos.Clear(); mesh.faces.Clear();
+            if (splitCopies)
+            {
+                // this object keeps copy 1; the "Array Copy" children place the rest relative to it
+                mesh.AppendCopies(src, new List<Matrix4x4> { xf[0] });
+                var inv = xf[0].inverse;
+                for (int i = 1; i < xf.Count; i++) splitXf.Add(xf[i] * inv);
+                return;
+            }
             mesh.AppendCopies(src, xf);
             if (merge) mesh.Weld(MeshUnits(mergeDistance));
         }
@@ -170,28 +199,23 @@ namespace BlendProperty
 
         void CurveTransforms(List<Matrix4x4> r, Matrix4x4 local)
         {
-            var ctrl = new List<Vector3>();
-            if (curvePoints != null) foreach (var t in curvePoints) if (t) ctrl.Add(transform.InverseTransformPoint(t.position));
-            if (ctrl.Count < 2) return;
-
+            Component sp = null;
+#if BLEND_SPLINES
+            sp = curveSpline;
+#endif
             // dense polyline + arc length, then copies placed by distance along it
-            const int perSegment = 24;
-            int segs = closedCurve ? ctrl.Count : ctrl.Count - 1;
-            var pts = new List<Vector3>();
-            for (int s = 0; s < segs; s++)
-                for (int k = 0; k < perSegment; k++)
-                    pts.Add(CurveModifier.CatmullRom(ctrl, s, (float)k / perSegment, closedCurve));
-            pts.Add(closedCurve ? pts[0] : ctrl[ctrl.Count - 1]);
+            var pts = CurveModifier.SamplePath(transform, sp, curvePoints, closedCurve, 24, out bool isClosed);
+            if (pts == null) return;
             var len = new float[pts.Count];
             for (int i = 1; i < pts.Count; i++) len[i] = len[i - 1] + (pts[i] - pts[i - 1]).magnitude;
             float total = len[len.Length - 1];
             if (total <= 0) return;
 
             float dist = MeshUnits(distance);
-            int n = countMethod == CountMethod.Count ? count : Mathf.FloorToInt(total / dist + 1e-4f) + (closedCurve ? 0 : 1);
+            int n = countMethod == CountMethod.Count ? count : Mathf.FloorToInt(total / dist + 1e-4f) + (isClosed ? 0 : 1);
             n = Mathf.Clamp(n, 1, MaxCopies);
             // closed: no copy on top of the first; open: first and last sit on the ends
-            float spacing = countMethod == CountMethod.Distance ? dist : closedCurve ? total / n : (n > 1 ? total / (n - 1) : 0f);
+            float spacing = countMethod == CountMethod.Distance ? dist : isClosed ? total / n : (n > 1 ? total / (n - 1) : 0f);
 
             // rotation-minimizing frame, started from the up vector, so copies don't spin around the curve
             Vector3 up = Vector3.up, prevTan = Vector3.zero;
@@ -208,6 +232,72 @@ namespace BlendProperty
                 prevTan = tan;
                 var rot = alignRotation ? Quaternion.LookRotation(Vector3.Cross(tan, up), up) : Quaternion.identity; // copy's +X along the curve
                 r.Add(Matrix4x4.TRS(p, rot, Vector3.one) * local);
+            }
+        }
+
+        const string ColliderPrefix = "Array Collider ", CopyPrefix = "Array Copy ";
+
+        /// <summary>Split Copies: transforms of copies 2..n relative to copy 1, from the last evaluation (null until then).</summary>
+        [System.NonSerialized] List<Matrix4x4> splitXf;
+
+        public override void AfterBuild(Mesh result)
+        {
+            bool on = enabled && splitCopies && result;
+            if (on && splitXf == null) return; // not evaluated since the last script reload: the children are still current
+            var xf = on ? splitXf : null;
+            var kids = Children(CopyPrefix, xf != null ? xf.Count : 0, 2);
+            var from = GetComponent<MeshRenderer>();
+            for (int i = 0; i < kids.Count; i++)
+            {
+                Place(kids[i].transform, xf[i]);
+                var mf = Get<MeshFilter>(kids[i]);
+                if (mf.sharedMesh != result) mf.sharedMesh = result;
+                var mr = Get<MeshRenderer>(kids[i]);
+                if (!from) continue;
+                mr.sharedMaterials = from.sharedMaterials;
+                mr.shadowCastingMode = from.shadowCastingMode;
+                mr.receiveShadows = from.receiveShadows;
+            }
+        }
+
+        /// <summary>This object's <paramref name="n"/> children named prefix + number: reuses, adds and removes as needed.</summary>
+        List<GameObject> Children(string prefix, int n, int firstNumber)
+        {
+            var kids = new List<GameObject>();
+            foreach (Transform c in transform) if (c.name.StartsWith(prefix)) kids.Add(c.gameObject);
+            for (int i = n; i < kids.Count; i++) DestroyImmediate(kids[i]);
+            if (kids.Count > n) kids.RemoveRange(n, kids.Count - n);
+            for (int i = kids.Count; i < n; i++)
+            {
+                var go = new GameObject(prefix + (i + firstNumber)) { layer = gameObject.layer };
+                go.transform.SetParent(transform, false);
+                kids.Add(go);
+            }
+            return kids;
+        }
+
+        static T Get<T>(GameObject go) where T : Component => go.TryGetComponent(out T c) ? c : go.AddComponent<T>();
+
+        static void Place(Transform t, Matrix4x4 m)
+        {
+            t.localPosition = m.GetColumn(3);
+            t.localRotation = m.ValidTRS() ? m.rotation : Quaternion.identity;
+            t.localScale = m.lossyScale;
+        }
+
+        /// <summary>Make this object's "Array Collider N" children match <paramref name="xf"/> (none when null).</summary>
+        void SyncColliders(List<Matrix4x4> xf, Bounds bounds)
+        {
+            int n = xf != null ? Mathf.Min(xf.Count, 1000) : 0; // ponytail: capped, past that use a convex MeshCollider
+            var kids = Children(ColliderPrefix, n, 1);
+            for (int i = 0; i < n; i++)
+            {
+                var go = kids[i];
+                Place(go.transform, xf[i]);
+                var box = Get<BoxCollider>(go);
+                box.center = bounds.center;
+                box.size = bounds.size;
+                box.sharedMaterial = colliderMaterial;
             }
         }
 

@@ -20,6 +20,8 @@ namespace BlendProperty.Editor
         public static Func<BlendModifierStack, Mesh, bool> ApplyToProBuilder;
         /// <summary>Set by the ProBuilder bridge: removes ProBuilder components before the build processor runs.</summary>
         public static Action<GameObject> StripProBuilder;
+        /// <summary>Set by the Udon bridge: at build, adds the world deformer for the stack's Runtime modifiers. Returns the mesh to ship, or null.</summary>
+        public static Func<BlendModifierStack, Mesh> BuildRuntime;
 
         static BlendModifierCommands()
         {
@@ -205,7 +207,7 @@ namespace BlendProperty.Editor
             while (ComponentUtility.MoveComponentDown(m)) { }
         }
 
-        [MenuItem("GameObject/Blend Modifier/Apply All in Children", priority = 0)]
+        [MenuItem("GameObject/Blend Property/Modifiers/Apply All in Children", priority = 0)]
         static void ApplyAllInChildren()
         {
             foreach (var root in Selection.gameObjects)
@@ -213,10 +215,10 @@ namespace BlendProperty.Editor
                     ApplyAll(s);
         }
 
-        [MenuItem("GameObject/Blend Modifier/Apply All in Children", true)]
+        [MenuItem("GameObject/Blend Property/Modifiers/Apply All in Children", true)]
         static bool ApplyAllInChildrenValidate() => Selection.gameObjects.Length > 0;
 
-        [MenuItem("GameObject/Blend Modifier/Remove All in Children", priority = 1)]
+        [MenuItem("GameObject/Blend Property/Modifiers/Remove All in Children", priority = 1)]
         static void RemoveAllInChildren()
         {
             Undo.SetCurrentGroupName("Remove All Modifiers");
@@ -227,7 +229,7 @@ namespace BlendProperty.Editor
             Undo.CollapseUndoOperations(group);
         }
 
-        [MenuItem("GameObject/Blend Modifier/Remove All in Children", true)]
+        [MenuItem("GameObject/Blend Property/Modifiers/Remove All in Children", true)]
         static bool RemoveAllInChildrenValidate() => Selection.gameObjects.Length > 0;
 
         // ------------------------------------------------------------------ cleanup
@@ -236,7 +238,7 @@ namespace BlendProperty.Editor
         /// Delete meshes in the bake folder that no saved scene or prefab, and nothing in the open scenes, uses.
         /// They pile up when stacks are removed or objects deleted.
         /// </summary>
-        [MenuItem("Tools/Blend Modifier/Delete Unused Baked Meshes")]
+        [MenuItem("Tools/Blend Property/Delete Unused Baked Meshes")]
         static void DeleteUnusedBaked()
         {
             if (!AssetDatabase.IsValidFolder(BakeFolder)) { EditorUtility.DisplayDialog("Blend Modifier", "No baked meshes yet.", "OK"); return; }
@@ -260,7 +262,7 @@ namespace BlendProperty.Editor
             void Use(Object o) { if (o) used.Add(AssetDatabase.GetAssetPath(o)); }
             foreach (var f in Object.FindObjectsByType<MeshFilter>(FindObjectsInactive.Include, FindObjectsSortMode.None)) Use(f.sharedMesh);
             foreach (var c in Object.FindObjectsByType<MeshCollider>(FindObjectsInactive.Include, FindObjectsSortMode.None)) Use(c.sharedMesh);
-            foreach (var s in AllStacks()) { Use(s.source); Use(s.Output); }
+            foreach (var s in AllStacks()) { Use(s.source); Use(s.Output); Use(s.RuntimeBase); }
             return AssetDatabase.FindAssets("t:Mesh", new[] { BakeFolder }).Select(AssetDatabase.GUIDToAssetPath)
                 .Distinct().Where(p => !used.Contains(p)).ToList();
         }
@@ -280,6 +282,12 @@ namespace BlendProperty.Editor
                     foreach (var stack in root.GetComponentsInChildren<BlendModifierStack>(true))
                     {
                         var mesh = stack.Modifiers().Count > 0 && stack.Output ? stack.Output : stack.source;
+#if BLEND_VRC
+                        bool buildRuntime = true;
+#else
+                        bool buildRuntime = !stack.keepAtRuntime;
+#endif
+                        if (stack.enabled && buildRuntime && BuildRuntime?.Invoke(stack) is Mesh live) mesh = live;
                         StripProBuilder?.Invoke(stack.gameObject);
                         var filter = stack.GetComponent<MeshFilter>();
                         if (filter) filter.sharedMesh = mesh;
@@ -316,10 +324,20 @@ namespace BlendProperty.Editor
 #if BLEND_VRC
             if (stack.keepAtRuntime)
                 EditorGUILayout.HelpBox("VRChat can't run this stack: it is still stripped from world builds. " +
-                                        "For runtime motion use the Blend Udon deformers (Wave, Simple Deform, Lattice).", MessageType.Warning);
+                                        "For runtime motion set Runtime to GPU on Wave, Simple Deform, Lattice, Hook or Warp.", MessageType.Warning);
 #endif
+            {
+                var all = stack.Modifiers();
+                int firstLive = all.FindIndex(m => m.enabled && m.Runtime != BlendModifier.RuntimeMode.Off);
+                int lastBaked = all.FindLastIndex(m => m.enabled && m.Runtime == BlendModifier.RuntimeMode.Off);
+                if (firstLive >= 0 && firstLive < lastBaked)
+                    EditorGUILayout.HelpBox("Modifiers with Runtime GPU run in the world after all the others. Move them to the bottom so the world matches the editor.", MessageType.Warning);
+            }
             var o = stack.Output;
             int count = stack.Modifiers().Count;
+            var addRect = GUILayoutUtility.GetRect(new GUIContent("Add Modifier"), EditorStyles.miniPullDown);
+            if (EditorGUI.DropdownButton(addRect, new GUIContent("Add Modifier", "Blender's Add Modifier menu: the new one goes to the bottom of the stack."), FocusType.Passive, EditorStyles.miniPullDown))
+                AddModifierMenu(stack.gameObject).DropDown(addRect);
             if (count == 0)
             {
                 EditorGUILayout.HelpBox("No modifiers left. Remove the stack to go back to the plain mesh.", MessageType.Info);
@@ -336,6 +354,23 @@ namespace BlendProperty.Editor
                 if (GUILayout.Button(new GUIContent("Remove All", "Drop every modifier without applying: back to the original mesh."))) { BlendModifierCommands.RemoveAll(stack); GUIUtility.ExitGUI(); }
                 if (GUILayout.Button("Rebuild")) stack.Rebuild(true);
             }
+        }
+
+        /// <summary>Every modifier, grouped Generate / Deform / Edit / Normals by its Add Component path.</summary>
+        static GenericMenu AddModifierMenu(GameObject go)
+        {
+            var menu = new GenericMenu();
+            var items = new List<(string path, System.Type type)>();
+            foreach (var t in TypeCache.GetTypesDerivedFrom<BlendModifier>())
+            {
+                if (t.IsAbstract) continue;
+                var attr = (AddComponentMenu)System.Attribute.GetCustomAttribute(t, typeof(AddComponentMenu));
+                string path = attr != null ? attr.componentMenu : "Other/" + ObjectNames.NicifyVariableName(t.Name);
+                items.Add((path.StartsWith("Blend Property/Modifiers/") ? path.Substring("Blend Property/Modifiers/".Length) : path, t));
+            }
+            foreach (var (path, type) in items.OrderBy(i => i.path))
+                menu.AddItem(new GUIContent(path), false, () => Undo.AddComponent(go, type));
+            return menu;
         }
 
         static long Tris(Mesh m)

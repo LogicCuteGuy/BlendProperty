@@ -14,11 +14,23 @@ namespace BlendProperty
         , VRC.SDKBase.IEditorOnly
 #endif
     {
+        /// <summary>VRChat runtime of a deform modifier: Off = baked once; GPU = a Udon + GPU deformer made at build keeps it live.</summary>
+        public enum RuntimeMode { Off, GPU }
+
+        /// <summary>Not Off: left out of the baked mesh and run in the world instead (see <see cref="RuntimeMode"/>).</summary>
+        public virtual RuntimeMode Runtime => RuntimeMode.Off;
+
         /// <summary>Modify <paramref name="mesh"/> in place (object-local space).</summary>
         public abstract void Apply(MeshData mesh);
 
         /// <summary>Scene objects whose transform/data changes should re-run this modifier.</summary>
         public virtual IEnumerable<Object> Dependencies() { yield break; }
+
+        /// <summary>
+        /// Called on every modifier (enabled or not) after the stack shows its result; <paramref name="result"/> is null
+        /// when it shows the source instead. For modifiers that keep scene objects in sync with the result.
+        /// </summary>
+        public virtual void AfterBuild(Mesh result) { }
 
         protected BlendModifierStack Stack => GetComponent<BlendModifierStack>();
 

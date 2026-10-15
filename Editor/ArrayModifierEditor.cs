@@ -33,6 +33,9 @@ namespace BlendProperty.Editor
             {
                 if (shape == Shape.Curve)
                 {
+#if BLEND_SPLINES
+                    EditorGUILayout.PropertyField(P("curveSpline"), new GUIContent("Spline"));
+#endif
                     EditorGUILayout.PropertyField(P("curvePoints"), new GUIContent("Curve Points"), true);
                     EditorGUILayout.PropertyField(P("closedCurve"), new GUIContent("Closed"));
                 }
@@ -96,9 +99,13 @@ namespace BlendProperty.Editor
                 }
             }
 
+            EditorGUILayout.PropertyField(P("splitCopies"));
             var merge = P("merge");
             EditorGUILayout.PropertyField(merge);
             if (merge.boolValue) EditorGUILayout.PropertyField(P("mergeDistance"), new GUIContent("Distance"));
+            var cpc = P("colliderPerCopy");
+            EditorGUILayout.PropertyField(cpc);
+            if (cpc.boolValue) EditorGUILayout.PropertyField(P("colliderMaterial"), new GUIContent("Material"));
             serializedObject.ApplyModifiedProperties();
         }
 

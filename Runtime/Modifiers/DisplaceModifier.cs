@@ -4,7 +4,7 @@ using UnityEngine;
 namespace BlendProperty
 {
     [Icon("Packages/com.logiccuteguy.blendproperty/Editor/Icons/Displace.png")]
-    [AddComponentMenu("Blend Modifier/Deform/Displace")]
+    [AddComponentMenu("Blend Property/Modifiers/Deform/Displace")]
     public class DisplaceModifier : BlendModifier
     {
         public enum Direction { Normal, X, Y, Z, RGBToXYZ, CustomNormal }

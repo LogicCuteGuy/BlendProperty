@@ -5,7 +5,7 @@ namespace BlendProperty
 {
     /// <summary>Blender Solidify (Simple mode).</summary>
     [Icon("Packages/com.logiccuteguy.blendproperty/Editor/Icons/Solidify.png")]
-    [AddComponentMenu("Blend Modifier/Generate/Solidify")]
+    [AddComponentMenu("Blend Property/Modifiers/Generate/Solidify")]
     public class SolidifyModifier : BlendModifier
     {
         public float thickness = 0.01f;

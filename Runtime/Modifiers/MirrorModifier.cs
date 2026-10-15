@@ -4,7 +4,7 @@ using UnityEngine;
 namespace BlendProperty
 {
     [Icon("Packages/com.logiccuteguy.blendproperty/Editor/Icons/Mirror.png")]
-    [AddComponentMenu("Blend Modifier/Generate/Mirror")]
+    [AddComponentMenu("Blend Property/Modifiers/Generate/Mirror")]
     public class MirrorModifier : BlendModifier
     {
         public bool x = true, y, z;

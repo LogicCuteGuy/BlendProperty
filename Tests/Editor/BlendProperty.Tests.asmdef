@@ -1,6 +1,6 @@
 {
     "name": "BlendProperty.Tests",
-    "references": ["BlendProperty", "BlendProperty.Editor", "UnityEngine.TestRunner", "UnityEditor.TestRunner"],
+    "references": ["BlendProperty", "BlendProperty.Editor", "BlendProperty.Udon", "UnityEngine.TestRunner", "UnityEditor.TestRunner"],
     "includePlatforms": ["Editor"],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
@@ -8,6 +8,8 @@
     "precompiledReferences": ["nunit.framework.dll"],
     "autoReferenced": false,
     "defineConstraints": ["UNITY_INCLUDE_TESTS"],
-    "versionDefines": [],
+    "versionDefines": [
+        { "name": "com.vrchat.worlds", "expression": "", "define": "BLEND_UDON" }
+    ],
     "noEngineReferences": false
 }

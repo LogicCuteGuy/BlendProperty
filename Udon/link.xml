@@ -1,0 +1,4 @@
+<linker>
+  <!-- Panels access runtime fields and events by name. -->
+  <assembly fullname="BlendProperty.Udon" preserve="all" />
+</linker>

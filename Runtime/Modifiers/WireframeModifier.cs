@@ -5,7 +5,7 @@ namespace BlendProperty
 {
     /// <summary>Blender Wireframe: every edge becomes a solid frame strip.</summary>
     [Icon("Packages/com.logiccuteguy.blendproperty/Editor/Icons/Wireframe.png")]
-    [AddComponentMenu("Blend Modifier/Generate/Wireframe")]
+    [AddComponentMenu("Blend Property/Modifiers/Generate/Wireframe")]
     public class WireframeModifier : BlendModifier
     {
         [Min(0)] public float thickness = 0.02f;

@@ -4,16 +4,20 @@ using UnityEngine;
 namespace BlendProperty
 {
     /// <summary>
-    /// Deform along a path. Unity has no curve object, so the path is a Catmull-Rom spline through
-    /// <see cref="points"/> (any Transforms, e.g. empty children). Position along <see cref="deformAxis"/>
+    /// Deform along a path: a Unity Splines <c>SplineContainer</c> (com.unity.splines) when <c>spline</c> is set,
+    /// else a Catmull-Rom spline through <see cref="points"/> (any Transforms, e.g. empty children). Position along <see cref="deformAxis"/>
     /// maps to distance along the path, like Blender's Curve modifier.
     /// </summary>
     [Icon("Packages/com.logiccuteguy.blendproperty/Editor/Icons/Curve.png")]
-    [AddComponentMenu("Blend Modifier/Deform/Curve")]
+    [AddComponentMenu("Blend Property/Modifiers/Deform/Curve")]
     public class CurveModifier : BlendModifier
     {
         public enum Axis { PosX, PosY, PosZ, NegX, NegY, NegZ }
 
+#if BLEND_SPLINES
+        [Tooltip("Unity Splines path (first spline of the container). Overrides Points; Closed comes from the spline.")]
+        public UnityEngine.Splines.SplineContainer spline;
+#endif
         public Transform[] points = new Transform[0];
         public bool closed;
         public Axis deformAxis = Axis.PosX;
@@ -23,22 +27,22 @@ namespace BlendProperty
 
         public override IEnumerable<Object> Dependencies()
         {
+#if BLEND_SPLINES
+            if (spline) { yield return spline; yield break; }
+#endif
             if (points != null) foreach (var p in points) if (p) yield return p;
         }
 
         public override void Apply(MeshData mesh)
         {
-            var ctrl = new List<Vector3>();
-            if (points != null) foreach (var t in points) if (t) ctrl.Add(transform.InverseTransformPoint(t.position));
-            if (ctrl.Count < 2) return;
+            Component sp = null;
+#if BLEND_SPLINES
+            sp = spline;
+#endif
+            var pts = SamplePath(transform, sp, points, closed, samplesPerSegment, out bool isClosed);
+            if (pts == null) return;
 
-            // sample spline + arc length + rotation-minimizing frames
-            int segs = closed ? ctrl.Count : ctrl.Count - 1;
-            var pts = new List<Vector3>();
-            for (int s = 0; s < segs; s++)
-                for (int k = 0; k < samplesPerSegment; k++)
-                    pts.Add(CatmullRom(ctrl, s, (float)k / samplesPerSegment, closed));
-            pts.Add(closed ? pts[0] : ctrl[ctrl.Count - 1]);
+            // arc length + rotation-minimizing frames
 
             int n = pts.Count;
             var len = new float[n];
@@ -66,7 +70,7 @@ namespace BlendProperty
                 var p = mesh.pos[i];
                 float s = p[ax] * sign;
                 Vector3 c, t, nn;
-                if (closed && total > 0) s = Mathf.Repeat(s, total);
+                if (isClosed && total > 0) s = Mathf.Repeat(s, total);
                 if (s <= 0) { t = tan[0]; nn = nor[0]; c = pts[0] + t * s; }
                 else if (s >= total) { t = tan[n - 1]; nn = nor[n - 1]; c = pts[n - 1] + t * (s - total); }
                 else
@@ -82,6 +86,38 @@ namespace BlendProperty
                 var b = Vector3.Cross(t, nn);
                 mesh.pos[i] = c + nn * p[a1] + b * p[a2] * sign;
             }
+        }
+
+        /// <summary>
+        /// Dense polyline in <paramref name="self"/>'s local space, last point closing the loop when closed:
+        /// the first spline of a Unity Splines container when given, else Catmull-Rom through <paramref name="points"/>.
+        /// Null when there is no usable path.
+        /// </summary>
+        internal static List<Vector3> SamplePath(Transform self, Component splineContainer, Transform[] points, bool closed, int perSegment, out bool isClosed)
+        {
+            var pts = new List<Vector3>();
+            isClosed = closed;
+#if BLEND_SPLINES
+            if (splineContainer is UnityEngine.Splines.SplineContainer c && c.Spline != null)
+            {
+                var sp = c.Spline;
+                if (sp.Count < 2) return null;
+                isClosed = sp.Closed;
+                int n = (isClosed ? sp.Count : sp.Count - 1) * perSegment;
+                for (int i = 0; i < n; i++) pts.Add(self.InverseTransformPoint((Vector3)c.EvaluatePosition((float)i / n)));
+                pts.Add(isClosed ? pts[0] : self.InverseTransformPoint((Vector3)c.EvaluatePosition(1f)));
+                return pts;
+            }
+#endif
+            var ctrl = new List<Vector3>();
+            if (points != null) foreach (var t in points) if (t) ctrl.Add(self.InverseTransformPoint(t.position));
+            if (ctrl.Count < 2) return null;
+            int segs = closed ? ctrl.Count : ctrl.Count - 1;
+            for (int s = 0; s < segs; s++)
+                for (int k = 0; k < perSegment; k++)
+                    pts.Add(CatmullRom(ctrl, s, (float)k / perSegment, closed));
+            pts.Add(closed ? pts[0] : ctrl[ctrl.Count - 1]);
+            return pts;
         }
 
         internal static Vector3 CatmullRom(List<Vector3> c, int seg, float t, bool closed)

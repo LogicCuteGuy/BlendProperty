@@ -5,7 +5,7 @@ namespace BlendProperty
 {
     /// <summary>Blender Warp: moves geometry by the offset between two objects, fading out with distance from "from".</summary>
     [Icon("Packages/com.logiccuteguy.blendproperty/Editor/Icons/Warp.png")]
-    [AddComponentMenu("Blend Modifier/Deform/Warp")]
+    [AddComponentMenu("Blend Property/Modifiers/Deform/Warp")]
     public class WarpModifier : BlendModifier
     {
         public enum Falloff { Constant, Linear, Smooth, Sharp, Sphere, Root }
@@ -17,6 +17,10 @@ namespace BlendProperty
         public Falloff falloff = Falloff.Smooth;
         [Tooltip("0 = no falloff (whole mesh).")]
         [Min(0)] public float radius = 1f;
+        [Tooltip("VRChat: Off = baked once. GPU = keeps it live in the world on the GPU (shows a frame or two late), following " +
+                 "moving objects. Runs after the other modifiers, so keep it at the bottom of the stack.")]
+        public RuntimeMode runtime;
+        public override RuntimeMode Runtime => runtime;
 
         public override IEnumerable<Object> Dependencies() { if (from) yield return from; if (to) yield return to; }
 

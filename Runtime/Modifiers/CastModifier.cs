@@ -4,7 +4,7 @@ using UnityEngine;
 namespace BlendProperty
 {
     [Icon("Packages/com.logiccuteguy.blendproperty/Editor/Icons/Cast.png")]
-    [AddComponentMenu("Blend Modifier/Deform/Cast")]
+    [AddComponentMenu("Blend Property/Modifiers/Deform/Cast")]
     public class CastModifier : BlendModifier
     {
         public enum Shape { Sphere, Cylinder, Cuboid }

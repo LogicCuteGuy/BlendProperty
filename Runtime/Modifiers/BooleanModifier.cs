@@ -10,7 +10,7 @@ namespace BlendProperty
     // ponytail: BSP CSG (csg.js), O(n²)-ish; fine for props, slow past a few thousand faces.
     // Leaves T-junctions where faces were cut (invisible after welding, Blender's Exact solver avoids them).
     [Icon("Packages/com.logiccuteguy.blendproperty/Editor/Icons/Boolean.png")]
-    [AddComponentMenu("Blend Modifier/Generate/Boolean")]
+    [AddComponentMenu("Blend Property/Modifiers/Generate/Boolean")]
     public class BooleanModifier : BlendModifier
     {
         public enum Operation { Intersect, Union, Difference }

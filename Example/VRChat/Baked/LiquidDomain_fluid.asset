@@ -1,0 +1,799 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &-7361186383315172152
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Simulation
+  m_Shader: {fileID: 4800000, guid: 7d1f7ccdb1c76ab45b71f78c789e28dc, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _Sim:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _Eps: 0.841435
+    - _H: 0.1319408
+    - _Rest: 3517.0396
+    - _S: 128
+    - _Scorr: 0.001188446
+    - _SortStart: 1
+    - _Spacing: 0.0659704
+    m_Colors:
+    - _Grid: {r: 19, g: 11, b: 11, a: 0}
+    - _Size: {r: 2.4, g: 1.4, b: 1.4, a: 0}
+  m_BuildTextureStacks: []
+--- !u!21 &-1019503764791708965
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Gather
+  m_Shader: {fileID: 4800000, guid: 7d1f7ccdb1c76ab45b71f78c789e28dc, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _Sim:
+        m_Texture: {fileID: 818066362682243197}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _Eps: 0.841435
+    - _H: 0.1319408
+    - _Rest: 3517.0396
+    - _S: 128
+    - _Scorr: 0.001188446
+    - _SortStart: 1
+    - _Spacing: 0.0659704
+    m_Colors:
+    - _Grid: {r: 19, g: 11, b: 11, a: 0}
+    - _Size: {r: 2.4, g: 1.4, b: 1.4, a: 0}
+  m_BuildTextureStacks: []
+--- !u!86 &8600000
+CustomRenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: LiquidDomain_fluid
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_IsAlphaChannelOptional: 0
+  serializedVersion: 5
+  m_Width: 40
+  m_Height: 23
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthStencilFormat: 0
+  m_ColorFormat: 45
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_EnableRandomWrite: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 3
+  m_VolumeDepth: 23
+  m_ShadowSamplingMode: 2
+  m_Material: {fileID: -1019503764791708965}
+  m_InitSource: 0
+  m_InitMaterial: {fileID: 0}
+  m_InitColor: {r: 0, g: 0, b: 0, a: 0}
+  m_InitTexture: {fileID: 0}
+  m_UpdateMode: 2
+  m_InitializationMode: 0
+  m_UpdateZoneSpace: 0
+  m_CurrentUpdateZoneSpace: 0
+  m_UpdateZones: []
+  m_UpdatePeriod: 0
+  m_ShaderPass: 7
+  m_CubemapFaceMask: 4294967295
+  m_DoubleBuffered: 0
+  m_WrapUpdateZones: 0
+--- !u!21 &412136593381998523
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Liquid
+  m_Shader: {fileID: 4800000, guid: 98386869cd92cc443b2650693198c90d, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _Density:
+        m_Texture: {fileID: 8600000}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _Absorption: 6
+    - _Ambient: 0.4
+    - _Smoothness: 0.95
+    - _Steps: 64
+    m_Colors:
+    - _Color: {r: 0.09999997, g: 0.45, b: 0.6, a: 1}
+  m_BuildTextureStacks: []
+--- !u!86 &818066362682243197
+CustomRenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Simulation
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_IsAlphaChannelOptional: 0
+  serializedVersion: 5
+  m_Width: 640
+  m_Height: 128
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthStencilFormat: 94
+  m_ColorFormat: 52
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_EnableRandomWrite: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 0
+    m_Aniso: 0
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
+  m_ShadowSamplingMode: 2
+  m_Material: {fileID: -7361186383315172152}
+  m_InitSource: 0
+  m_InitMaterial: {fileID: 0}
+  m_InitColor: {r: 0, g: 0, b: 0, a: 0}
+  m_InitTexture: {fileID: 0}
+  m_UpdateMode: 2
+  m_InitializationMode: 0
+  m_UpdateZoneSpace: 0
+  m_CurrentUpdateZoneSpace: 0
+  m_UpdateZones:
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 0
+    needSwap: 0
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 2
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 3
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 4
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 3
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 4
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 3
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 4
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 5
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 6
+    needSwap: 1
+  m_UpdatePeriod: 0
+  m_ShaderPass: 0
+  m_CubemapFaceMask: 4294967295
+  m_DoubleBuffered: 1
+  m_WrapUpdateZones: 0

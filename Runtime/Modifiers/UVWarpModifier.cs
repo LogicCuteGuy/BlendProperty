@@ -3,7 +3,7 @@ using UnityEngine;
 namespace BlendProperty
 {
     [Icon("Packages/com.logiccuteguy.blendproperty/Editor/Icons/UVWarp.png")]
-    [AddComponentMenu("Blend Modifier/Edit/UV Warp")]
+    [AddComponentMenu("Blend Property/Modifiers/Edit/UV Warp")]
     public class UVWarpModifier : BlendModifier
     {
         public Vector2 center = new Vector2(0.5f, 0.5f);

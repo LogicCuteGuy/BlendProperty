@@ -4,7 +4,7 @@ using UnityEngine;
 namespace BlendProperty
 {
     [Icon("Packages/com.logiccuteguy.blendproperty/Editor/Icons/Decimate.png")]
-    [AddComponentMenu("Blend Modifier/Generate/Decimate")]
+    [AddComponentMenu("Blend Property/Modifiers/Generate/Decimate")]
     public class DecimateModifier : BlendModifier
     {
         public enum Mode { Collapse, Planar, UnSubdivide }

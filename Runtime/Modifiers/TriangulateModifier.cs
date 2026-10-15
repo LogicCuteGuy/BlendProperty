@@ -4,7 +4,7 @@ using UnityEngine;
 namespace BlendProperty
 {
     [Icon("Packages/com.logiccuteguy.blendproperty/Editor/Icons/Triangulate.png")]
-    [AddComponentMenu("Blend Modifier/Generate/Triangulate")]
+    [AddComponentMenu("Blend Property/Modifiers/Generate/Triangulate")]
     public class TriangulateModifier : BlendModifier
     {
         public enum QuadMethod { Beauty, Fixed, FixedAlternate, ShortestDiagonal, LongestDiagonal }

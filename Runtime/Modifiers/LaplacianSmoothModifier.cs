@@ -6,7 +6,7 @@ namespace BlendProperty
     /// Smoothing that keeps its volume (Taubin λ|μ): unlike Smooth, repeated passes don't shrink the mesh.
     /// </summary>
     [Icon("Packages/com.logiccuteguy.blendproperty/Editor/Icons/LaplacianSmooth.png")]
-    [AddComponentMenu("Blend Modifier/Deform/Laplacian Smooth")]
+    [AddComponentMenu("Blend Property/Modifiers/Deform/Laplacian Smooth")]
     public class LaplacianSmoothModifier : BlendModifier
     {
         [Range(-10, 10), Tooltip("Negative values exaggerate the shape instead of smoothing it.")]

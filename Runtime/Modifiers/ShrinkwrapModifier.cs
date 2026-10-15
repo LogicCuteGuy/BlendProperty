@@ -6,7 +6,7 @@ namespace BlendProperty
     /// <summary>Blender Shrinkwrap: snap vertices onto another object's surface.</summary>
     // ponytail: brute force over every target triangle (O(verts × tris)); add a BVH if targets get big.
     [Icon("Packages/com.logiccuteguy.blendproperty/Editor/Icons/Shrinkwrap.png")]
-    [AddComponentMenu("Blend Modifier/Deform/Shrinkwrap")]
+    [AddComponentMenu("Blend Property/Modifiers/Deform/Shrinkwrap")]
     public class ShrinkwrapModifier : BlendModifier
     {
         public enum Mode { NearestSurfacePoint, Project, NearestVertex }

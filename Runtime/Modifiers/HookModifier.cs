@@ -8,7 +8,7 @@ namespace BlendProperty
     /// No vertex groups here, so the area is chosen by radius around the bind position.
     /// </summary>
     [Icon("Packages/com.logiccuteguy.blendproperty/Editor/Icons/Hook.png")]
-    [AddComponentMenu("Blend Modifier/Deform/Hook")]
+    [AddComponentMenu("Blend Property/Modifiers/Deform/Hook")]
     public class HookModifier : BlendModifier
     {
         public Transform target;
@@ -16,11 +16,18 @@ namespace BlendProperty
         public WarpModifier.Falloff falloff = WarpModifier.Falloff.Smooth;
         [Tooltip("0 = whole mesh.")]
         [Min(0)] public float radius = 1f;
+        [Tooltip("VRChat: Off = baked once. GPU = keeps it live in the world on the GPU (shows a frame or two late), following " +
+                 "moving objects. Runs after the other modifiers, so keep it at the bottom of the stack.")]
+        public RuntimeMode runtime;
+        public override RuntimeMode Runtime => runtime;
 
         [SerializeField, HideInInspector] Transform boundTo;
         [SerializeField, HideInInspector] Matrix4x4 bind = Matrix4x4.identity;
 
         public override IEnumerable<Object> Dependencies() { if (target) yield return target; }
+
+        /// <summary>The target's rest placement in this object's space (what Apply binds to).</summary>
+        public Matrix4x4 BindMatrix => target && target != boundTo ? ToLocal(target) : bind;
 
         /// <summary>Blender "Reset": the target's current placement becomes the rest position.</summary>
         [ContextMenu("Reset Hook")]

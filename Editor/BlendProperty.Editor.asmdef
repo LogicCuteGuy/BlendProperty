@@ -10,7 +10,8 @@
     "autoReferenced": true,
     "defineConstraints": [],
     "versionDefines": [
-        { "name": "com.vrchat.base", "expression": "", "define": "BLEND_VRC" }
+        { "name": "com.vrchat.base", "expression": "", "define": "BLEND_VRC" },
+        { "name": "com.unity.splines", "expression": "2.0.0", "define": "BLEND_SPLINES" }
     ],
     "noEngineReferences": false
 }

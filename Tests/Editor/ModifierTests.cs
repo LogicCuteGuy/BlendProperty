@@ -58,6 +58,30 @@ namespace BlendProperty.Tests
             Assert.AreEqual(3f, m.GetBounds().size.x, 1e-4f);
         }
 
+        [Test] public void Array_SplitCopiesAreChildren()
+        {
+            var keep = BlendModifierStack.PersistOutput; BlendModifierStack.PersistOutput = null;
+            try
+            {
+                go = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                Object.DestroyImmediate(go.GetComponent<BoxCollider>());
+                var a = go.AddComponent<ArrayModifier>();
+                a.count = 3; a.splitCopies = true;
+                var stack = go.GetComponent<BlendModifierStack>();
+                stack.Rebuild(true);
+                Assert.AreEqual(1f, stack.Output.bounds.size.x, 1e-4f); // this object keeps one copy
+                Assert.AreEqual(2, go.transform.childCount);
+                var c3 = go.transform.Find("Array Copy 3");
+                Assert.AreEqual(2f, c3.localPosition.x, 1e-4f);
+                Assert.AreEqual(stack.Output, c3.GetComponent<MeshFilter>().sharedMesh);
+                Assert.AreEqual(go.GetComponent<MeshRenderer>().sharedMaterial, c3.GetComponent<MeshRenderer>().sharedMaterial);
+
+                a.enabled = false; BlendModifierStack.FlushPending();
+                Assert.AreEqual(0, go.transform.childCount);
+            }
+            finally { BlendModifierStack.PersistOutput = keep; }
+        }
+
         [Test] public void Array_CircleFullAndArc()
         {
             go = new GameObject(); go.AddComponent<MeshFilter>();

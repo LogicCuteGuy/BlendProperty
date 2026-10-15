@@ -6,7 +6,7 @@ namespace BlendProperty
     /// <summary>Blender UV Project: planar UVs from a projector object (its local XY, centred, 1 unit = 1 UV tile).</summary>
     // ponytail: one orthographic projector; Blender also takes several projectors and camera perspective.
     [Icon("Packages/com.logiccuteguy.blendproperty/Editor/Icons/UVProject.png")]
-    [AddComponentMenu("Blend Modifier/Edit/UV Project")]
+    [AddComponentMenu("Blend Property/Modifiers/Edit/UV Project")]
     public class UVProjectModifier : BlendModifier
     {
         [Tooltip("Projects along its local Z. Empty = this object, projecting along Z.")]

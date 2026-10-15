@@ -10,7 +10,7 @@ namespace BlendProperty
     /// high-valence saddle vertices can leave slivers. Upgrade path: port Blender's BoundVert/VMesh builder.
     /// </summary>
     [Icon("Packages/com.logiccuteguy.blendproperty/Editor/Icons/Bevel.png")]
-    [AddComponentMenu("Blend Modifier/Generate/Bevel")]
+    [AddComponentMenu("Blend Property/Modifiers/Generate/Bevel")]
     public class BevelModifier : BlendModifier
     {
         public enum Affect { Edges, Vertices }

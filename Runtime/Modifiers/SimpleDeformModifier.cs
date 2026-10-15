@@ -5,7 +5,7 @@ namespace BlendProperty
 {
     /// <summary>Blender Simple Deform. Twist/Bend angle is the total over the limit span (Blender normalizes the same way).</summary>
     [Icon("Packages/com.logiccuteguy.blendproperty/Editor/Icons/SimpleDeform.png")]
-    [AddComponentMenu("Blend Modifier/Deform/Simple Deform")]
+    [AddComponentMenu("Blend Property/Modifiers/Deform/Simple Deform")]
     public class SimpleDeformModifier : BlendModifier
     {
         public enum Mode { Twist, Bend, Taper, Stretch }
@@ -23,6 +23,10 @@ namespace BlendProperty
         [Range(0, 1)] public float upperLimit = 1f;
         [Tooltip("Twist, Taper, Stretch: keep these local coordinates unchanged (the deform axis itself is ignored).")]
         public bool lockX, lockY, lockZ;
+        [Tooltip("VRChat: Off = baked once. GPU = keeps it live in the world on the GPU (shows a frame or two late), following " +
+                 "moving objects. Runs after the other modifiers, so keep it at the bottom of the stack.")]
+        public RuntimeMode runtime;
+        public override RuntimeMode Runtime => runtime;
 
         public override IEnumerable<Object> Dependencies() { if (origin) yield return origin; }
 

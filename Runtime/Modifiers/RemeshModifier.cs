@@ -12,7 +12,7 @@ namespace BlendProperty
     // ponytail: inside/outside from ray parity + surface nets (not Blender's dual contouring / OpenVDB),
     // so parts thinner than a voxel vanish. Grid capped at MaxCells per axis.
     [Icon("Packages/com.logiccuteguy.blendproperty/Editor/Icons/Remesh.png")]
-    [AddComponentMenu("Blend Modifier/Generate/Remesh")]
+    [AddComponentMenu("Blend Property/Modifiers/Generate/Remesh")]
     public class RemeshModifier : BlendModifier
     {
         public enum Mode { Voxel, Blocks, Smooth, Sharp }

@@ -4,7 +4,7 @@ using UnityEngine;
 namespace BlendProperty
 {
     [Icon("Packages/com.logiccuteguy.blendproperty/Editor/Icons/Subdivision.png")]
-    [AddComponentMenu("Blend Modifier/Generate/Subdivision Surface")]
+    [AddComponentMenu("Blend Property/Modifiers/Generate/Subdivision Surface")]
     public class SubdivisionModifier : BlendModifier
     {
         public enum Mode { CatmullClark, Simple }

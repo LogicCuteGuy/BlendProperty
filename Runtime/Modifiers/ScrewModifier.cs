@@ -8,7 +8,7 @@ namespace BlendProperty
     /// Unity meshes have no loose edges, so model the profile as a thin strip or open polyline of faces.
     /// </summary>
     [Icon("Packages/com.logiccuteguy.blendproperty/Editor/Icons/Screw.png")]
-    [AddComponentMenu("Blend Modifier/Generate/Screw")]
+    [AddComponentMenu("Blend Property/Modifiers/Generate/Screw")]
     public class ScrewModifier : BlendModifier
     {
         public enum Axis { X, Y, Z }

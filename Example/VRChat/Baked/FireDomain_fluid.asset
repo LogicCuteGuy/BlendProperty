@@ -1,0 +1,319 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &-6238455050955106347
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Copy
+  m_Shader: {fileID: 4800000, guid: 84b2f4da6c770c040885fcdcb3a9fded, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _Sim:
+        m_Texture: {fileID: -3664104606948019683}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _Tiles: 5
+    m_Colors:
+    - _Dims: {r: 24, g: 40, b: 24, a: 0}
+  m_BuildTextureStacks: []
+--- !u!86 &-3664104606948019683
+CustomRenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Simulation
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_IsAlphaChannelOptional: 0
+  serializedVersion: 5
+  m_Width: 240
+  m_Height: 200
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthStencilFormat: 94
+  m_ColorFormat: 48
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_EnableRandomWrite: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 0
+    m_Aniso: 0
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
+  m_ShadowSamplingMode: 2
+  m_Material: {fileID: -2134439888188968845}
+  m_InitSource: 0
+  m_InitMaterial: {fileID: 0}
+  m_InitColor: {r: 0, g: 0, b: 0, a: 0}
+  m_InitTexture: {fileID: 0}
+  m_UpdateMode: 2
+  m_InitializationMode: 0
+  m_UpdateZoneSpace: 0
+  m_CurrentUpdateZoneSpace: 0
+  m_UpdateZones:
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 0
+    needSwap: 0
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 1
+    needSwap: 1
+  - updateZoneCenter: {x: 0.5, y: 0.5, z: 0.5}
+    updateZoneSize: {x: 1, y: 1, z: 1}
+    rotation: 0
+    passIndex: 2
+    needSwap: 1
+  m_UpdatePeriod: 0
+  m_ShaderPass: 0
+  m_CubemapFaceMask: 4294967295
+  m_DoubleBuffered: 1
+  m_WrapUpdateZones: 0
+--- !u!21 &-2134439888188968845
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Simulation
+  m_Shader: {fileID: 4800000, guid: 84b2f4da6c770c040885fcdcb3a9fded, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _Sim:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _Tiles: 5
+    m_Colors:
+    - _Dims: {r: 24, g: 40, b: 24, a: 0}
+  m_BuildTextureStacks: []
+--- !u!86 &8600000
+CustomRenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: FireDomain_fluid
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_IsAlphaChannelOptional: 0
+  serializedVersion: 5
+  m_Width: 24
+  m_Height: 40
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthStencilFormat: 0
+  m_ColorFormat: 48
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_EnableRandomWrite: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 3
+  m_VolumeDepth: 24
+  m_ShadowSamplingMode: 2
+  m_Material: {fileID: -6238455050955106347}
+  m_InitSource: 0
+  m_InitMaterial: {fileID: 0}
+  m_InitColor: {r: 0, g: 0, b: 0, a: 0}
+  m_InitTexture: {fileID: 0}
+  m_UpdateMode: 2
+  m_InitializationMode: 0
+  m_UpdateZoneSpace: 0
+  m_CurrentUpdateZoneSpace: 0
+  m_UpdateZones: []
+  m_UpdatePeriod: 0
+  m_ShaderPass: 3
+  m_CubemapFaceMask: 4294967295
+  m_DoubleBuffered: 0
+  m_WrapUpdateZones: 0
+--- !u!21 &4634474835091876420
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Smoke
+  m_Shader: {fileID: 4800000, guid: ca7deac5d5ef3d147a904cc6f94c36a3, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _Density:
+        m_Texture: {fileID: 8600000}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _Absorption: 14
+    - _Ambient: 0.35
+    - _FlameStrength: 6
+    - _Shadow: 0.8
+    - _Steps: 48
+    m_Colors:
+    - _Color: {r: 0.3, g: 0.3, b: 0.32, a: 1}
+    - _FireColor: {r: 0, g: 0, b: 0, a: 1}
+    - _FlameColor: {r: 6, g: 2.2, b: 0.5, a: 1}
+    - _FlameEdge: {r: 2, g: 0.25, b: 0.05, a: 1}
+  m_BuildTextureStacks: []

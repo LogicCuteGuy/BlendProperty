@@ -5,10 +5,12 @@ namespace BlendProperty
     /// <summary>
     /// Lattice cage for <see cref="LatticeModifier"/>. Unit cube (-0.5..0.5) in this transform's space;
     /// scale/rotate the GameObject to fit, then drag the points (scene handles when selected).
+    /// With exactly U × V × W child objects (U fastest), the children are the points instead: move or animate them,
+    /// and with Runtime GPU on the Lattice modifier they stay live in the world.
     /// </summary>
     [ExecuteAlways]
     [Icon("Packages/com.logiccuteguy.blendproperty/Editor/Icons/LatticeObject.png")]
-    [AddComponentMenu("Blend Modifier/Lattice Object")]
+    [AddComponentMenu("Blend Property/Modifiers/Lattice Object")]
     public class BlendLattice : MonoBehaviour
 #if BLEND_VRC
         , VRC.SDKBase.IEditorOnly
@@ -18,6 +20,16 @@ namespace BlendProperty
         [HideInInspector] public Vector3[] points;
 
         public int Index(int u, int v, int w) => u + resolutionU * (v + resolutionV * w);
+
+        public bool UsesChildren => transform.childCount == resolutionU * resolutionV * resolutionW;
+
+        /// <summary>Copy the child objects' positions into <see cref="points"/> when they are the points.</summary>
+        public void SyncChildren()
+        {
+            if (!UsesChildren) return;
+            EnsurePoints();
+            for (int i = 0; i < points.Length; i++) points[i] = transform.GetChild(i).localPosition;
+        }
 
         public Vector3 Rest(int u, int v, int w) => new Vector3(
             (float)u / (resolutionU - 1) - 0.5f, (float)v / (resolutionV - 1) - 0.5f, (float)w / (resolutionW - 1) - 0.5f);

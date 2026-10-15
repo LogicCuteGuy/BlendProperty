@@ -3,7 +3,7 @@
   "displayName": "Blend Property",
   "version": "0.1.0",
   "unity": "2022.3",
-  "description": "Blender-style modifier stack (Generate / Deform / Normals) as editor-only components. Baked to mesh assets, stripped from builds. Optional ProBuilder support.",
+  "description": "Blender-style mesh modifiers and GPU physics for standalone Unity games and VRChat worlds. Bake meshes or run live modifiers, cloth, fluids, hair, particles and paint. Optional ProBuilder and UdonSharp integration.",
   "author": {
     "name": "LogicCuteGuy"
   },
@@ -16,7 +16,9 @@
     "probuilder",
     "vrchat"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "com.unity.ugui": "1.0.0"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/LogicCuteGuy/BlendProperty.git"

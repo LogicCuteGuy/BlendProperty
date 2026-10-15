@@ -4,7 +4,7 @@ namespace BlendProperty
 {
     /// <summary>Blender "Smooth by Angle": smooth shading except across edges sharper than <see cref="angle"/>.</summary>
     [Icon("Packages/com.logiccuteguy.blendproperty/Editor/Icons/SmoothByAngle.png")]
-    [AddComponentMenu("Blend Modifier/Normals/Smooth by Angle")]
+    [AddComponentMenu("Blend Property/Modifiers/Normals/Smooth by Angle")]
     public class SmoothByAngleModifier : BlendModifier
     {
         [Range(0, 180)] public float angle = 30f;

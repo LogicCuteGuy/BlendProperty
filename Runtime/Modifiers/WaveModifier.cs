@@ -5,7 +5,7 @@ namespace BlendProperty
 {
     /// <summary>Blender Wave on the XZ plane, lifting along Y (Unity is Y-up). Baked at <see cref="time"/> (no runtime animation: the result is a static mesh).</summary>
     [Icon("Packages/com.logiccuteguy.blendproperty/Editor/Icons/Wave.png")]
-    [AddComponentMenu("Blend Modifier/Deform/Wave")]
+    [AddComponentMenu("Blend Property/Modifiers/Deform/Wave")]
     public class WaveModifier : BlendModifier
     {
         public bool motionX = true, motionZ = true;
@@ -28,6 +28,12 @@ namespace BlendProperty
         public float life;
         [Min(0), Tooltip("Time over which the wave fades to nothing after Life.")]
         public float damping = 10f;
+        [Tooltip("VRChat: Off = baked once. GPU = keeps it live in the world on the GPU (shows a frame or two late), following " +
+                 "moving objects. Runs after the other modifiers, so keep it at the bottom of the stack.")]
+        public RuntimeMode runtime;
+        public override RuntimeMode Runtime => runtime;
+        [Tooltip("Runtime: advance Time every second, so the wave travels.")]
+        public bool animate = true;
 
         public override IEnumerable<Object> Dependencies() { if (startObject) yield return startObject; }
 

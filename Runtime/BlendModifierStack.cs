@@ -14,7 +14,7 @@ namespace BlendProperty
     [ExecuteAlways, DisallowMultipleComponent]
     [RequireComponent(typeof(MeshFilter))]
     [Icon("Packages/com.logiccuteguy.blendproperty/Editor/Icons/ModifierStack.png")]
-    [AddComponentMenu("Blend Modifier/Modifier Stack")]
+    [AddComponentMenu("Blend Property/Modifiers/Modifier Stack")]
     public sealed class BlendModifierStack : MonoBehaviour
 #if BLEND_VRC
         , VRC.SDKBase.IEditorOnly
@@ -36,8 +36,11 @@ namespace BlendProperty
         [SerializeField, HideInInspector] Mesh output;
         [NonSerialized] Mesh runtimeOutput;
         [SerializeField, HideInInspector] int signature;
+        [SerializeField, HideInInspector] Mesh runtimeBase;
 
         public Mesh Output => output;
+        /// <summary>The result without the modifiers whose Runtime is on: what ships when the world runs them live. Null when none are.</summary>
+        public Mesh RuntimeBase => runtimeBase;
         public MeshFilter Filter => GetComponent<MeshFilter>();
 
         /// <summary>When false the filter shows <see cref="source"/> (ProBuilder edit mode).</summary>
@@ -58,14 +61,14 @@ namespace BlendProperty
         }
 
         /// <summary>Run source through modifiers [0..upTo] (enabled ones only).</summary>
-        public MeshData Evaluate(int upTo = int.MaxValue)
+        public MeshData Evaluate(int upTo = int.MaxValue, bool skipRuntime = false)
         {
             var data = MeshData.FromMesh(source, joinTriangles);
             if (shading == ShadingMode.KeepImported) data.customNormals = true;
             var mods = Modifiers();
             for (int i = 0; i < mods.Count && i <= upTo; i++)
             {
-                if (!mods[i].enabled) continue;
+                if (!mods[i].enabled || (skipRuntime && mods[i].Runtime != BlendModifier.RuntimeMode.Off)) continue;
                 try { mods[i].Apply(data); }
                 catch (Exception e) { Debug.LogException(e, mods[i]); }
             }
@@ -114,6 +117,16 @@ namespace BlendProperty
             }
             Filter.sharedMesh = mesh;
             SetCollider(mesh, true);
+            Built(mesh == source ? null : mesh);
+        }
+
+        void Built(Mesh result)
+        {
+            foreach (var m in Modifiers())
+            {
+                try { m.AfterBuild(result); }
+                catch (Exception e) { Debug.LogException(e, m); }
+            }
         }
 
         void OnDestroy()
@@ -206,6 +219,7 @@ namespace BlendProperty
             {
                 if (filter.sharedMesh != source) filter.sharedMesh = source;
                 SetCollider(source, false);
+                Built(null);
                 return;
             }
 
@@ -214,6 +228,7 @@ namespace BlendProperty
             {
                 // unchanged: just show it again (e.g. after the component was re-checked)
                 if (filter.sharedMesh != output) { filter.sharedMesh = output; SetCollider(output, false); }
+                Built(output);
                 return;
             }
 
@@ -224,9 +239,20 @@ namespace BlendProperty
             output.name = $"{name}_blend";
             if (PersistOutput != null) output = PersistOutput(this, output);
 
+            // runtime modifiers run in the world on top of this one
+            if (mods.Exists(m => m.enabled && m.Runtime != BlendModifier.RuntimeMode.Off))
+            {
+                if (!runtimeBase || runtimeBase == output) runtimeBase = new Mesh();
+                Evaluate(int.MaxValue, true).ToMesh(runtimeBase, AutoSmoothAngle);
+                runtimeBase.name = $"{name}_blend_base";
+                if (PersistOutput != null) runtimeBase = PersistOutput(this, runtimeBase);
+            }
+            else runtimeBase = null;
+
             signature = sig;
             filter.sharedMesh = output;
             SetCollider(output, true);
+            Built(output);
             EditorUtility.SetDirty(this);
         }
 

@@ -1,0 +1,16 @@
+{
+    "name": "BlendProperty.Udon.Editor",
+    "rootNamespace": "BlendProperty.Udon.Editor",
+    "references": ["BlendProperty", "BlendProperty.Editor", "BlendProperty.Udon", "UdonSharp.Editor", "UdonSharp.Runtime", "VRC.Udon"],
+    "includePlatforms": ["Editor"],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [
+        { "name": "com.vrchat.worlds", "expression": "", "define": "BLEND_UDON" }
+    ],
+    "noEngineReferences": false
+}

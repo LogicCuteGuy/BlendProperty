@@ -9,7 +9,7 @@ namespace BlendProperty
     /// ranks faces into buckets. Threshold rounds the normalized values so near-equal faces weigh the same.
     /// </summary>
     [Icon("Packages/com.logiccuteguy.blendproperty/Editor/Icons/WeightedNormal.png")]
-    [AddComponentMenu("Blend Modifier/Normals/Weighted Normal")]
+    [AddComponentMenu("Blend Property/Modifiers/Normals/Weighted Normal")]
     public class WeightedNormalModifier : BlendModifier
     {
         public enum Mode { FaceArea, CornerAngle, FaceAreaAndAngle }
