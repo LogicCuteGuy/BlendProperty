@@ -1,14 +1,14 @@
 {
   "name": "com.logiccuteguy.blendproperty",
   "displayName": "Blend Property",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "unity": "2022.3",
   "description": "Blender-style mesh modifiers and GPU physics for standalone Unity games and VRChat worlds. Bake meshes or run live modifiers, cloth, fluids, hair, particles and paint. Optional ProBuilder and UdonSharp integration.",
   "author": {
     "name": "LogicCuteGuy"
   },
   "license": "MIT",
-  "documentationUrl": "https://github.com/LogicCuteGuy/BlendProperty/blob/v0.2.0/Documentation~/BlendProperty.md",
+  "documentationUrl": "https://github.com/LogicCuteGuy/BlendProperty/blob/v0.2.1/Documentation~/BlendProperty.md",
   "keywords": [
     "blender",
     "modifier",
