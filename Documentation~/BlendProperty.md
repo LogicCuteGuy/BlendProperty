@@ -14,13 +14,24 @@ The new screenshots show the normal Unity Editor and its normal Inspector. Click
 
 ## Install
 
-Use either method:
+The package needs Unity 2022.3 or newer. If ProBuilder is installed, the ProBuilder bridge turns on automatically.
+
+### VCC / ALCOM
+
+Blend Property is available through the LogicCuteGuy VPM repository.
+
+1. [Add the LogicCuteGuy VPM repository](https://vpm.logiccuteguy.com/) to VCC / ALCOM. You can also add `https://vpm.logiccuteguy.com/index.json` manually in the app's repository settings.
+2. Open **Manage Project** for your Unity project and enable the LogicCuteGuy repository if needed.
+3. Find **Blend Property** (`com.logiccuteguy.blendproperty`) and add the latest available version to the project.
+4. Open the project in Unity and let the package import.
+
+### Unity Package Manager / manual
 
 - **Package Manager → + → Add package from git URL…** and enter `https://github.com/LogicCuteGuy/BlendProperty.git`.
-  To pin a version, append a tag, for example `#v0.1.0`.
-- Copy the `com.logiccuteguy.blendproperty` folder into your project's `Packages/` folder.
+  To pin a version, append a tag, for example `#v0.2.0`.
+- Download the `com.logiccuteguy.blendproperty-<version>.zip` package asset from [GitHub Releases](https://github.com/LogicCuteGuy/BlendProperty/releases) and extract it into `Packages/com.logiccuteguy.blendproperty/`, with `package.json` directly inside that folder.
 
-The package needs Unity 2022.3 or newer. If ProBuilder is installed, the ProBuilder bridge turns on automatically.
+Choose one installation method per project to avoid duplicate copies.
 
 ## Open the example scene
 
