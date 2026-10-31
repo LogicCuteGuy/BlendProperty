@@ -200,7 +200,7 @@ stack.RebuildNow();
 
 ### VRChat: Udon deformers
 
-The modifier stack can't run in Udon: its mesh code uses C# classes, structs and collections that Udon doesn't support, and even simple modifiers would be too slow there. The Udon deformers are small UdonSharp behaviours that reshape the baked mesh instead. They compile with stock UdonSharp and with LCGUdonSharp.
+The modifier stack can't run in Udon: its mesh code uses C# classes, structs and collections that Udon doesn't support, and even simple modifiers would be too slow there. The Udon deformers are small UdonSharp behaviours that reshape the baked mesh instead. They compile with stock UdonSharp.
 
 1. Bake the shape you want with modifiers as usual. For example, Subdivision gives a flat plane enough vertices to wave.
 2. Add one of these to the same object:
