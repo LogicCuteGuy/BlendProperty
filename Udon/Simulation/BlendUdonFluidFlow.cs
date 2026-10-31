@@ -15,7 +15,6 @@ namespace BlendProperty.Udon
     /// into flame (Fire), both, or liquid (in a Liquid domain), in every BlendUdonFluid domain that lists it. Put it on a pickup to carry it around.
     /// Turn the component off to stop it.
     /// </summary>
-    [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
     [Icon("Packages/com.logiccuteguy.blendproperty/Editor/Icons/Physics/FluidFlow.png")]
     [AddComponentMenu("Blend Property/Physics/Simulation/Fluid Flow")]
     public class BlendUdonFluidFlow : UdonSharpBehaviour

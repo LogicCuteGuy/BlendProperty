@@ -14,9 +14,9 @@ namespace BlendProperty.Udon
     /// Blender Dynamic Paint brush (Proximity): paints every BlendUdonDynamicPaint canvas that lists it, within
     /// Radius of the tip. Put it on a pickup to paint by hand, or on anything that moves.
     /// </summary>
-    [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
     [Icon("Packages/com.logiccuteguy.blendproperty/Editor/Icons/Physics/DynamicPaintBrush.png")]
     [AddComponentMenu("Blend Property/Physics/Simulation/Dynamic Paint Brush")]
+    [UdonBehaviourSyncMode(BehaviourSyncMode.NoVariableSync)] // no synced variables: works next to VRC Object Sync
     public class BlendUdonPaintBrush : UdonSharpBehaviour
     {
         [Header("Tool")]

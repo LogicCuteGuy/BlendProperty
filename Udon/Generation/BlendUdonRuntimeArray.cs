@@ -9,7 +9,6 @@ using UnityEngine;
 namespace BlendProperty.Udon
 {
     /// <summary>A small runtime mesh generation example. Local to each player; call Generate after changing settings.</summary>
-    [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
     [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
     [AddComponentMenu("")]
     public class BlendUdonRuntimeArray : UdonSharpBehaviour

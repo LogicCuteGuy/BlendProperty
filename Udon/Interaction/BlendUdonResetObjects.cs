@@ -15,7 +15,6 @@ namespace BlendProperty.Udon
     /// Hook a Button's On Click → SendCustomEvent "ResetObjects". Objects with VRC Object Sync are respawned for
     /// everyone (this player takes ownership); the rest move back for this player only.
     /// </summary>
-    [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
     [Icon("Packages/com.logiccuteguy.blendproperty/Editor/Icons/Physics/ResetObjects.png")]
     [AddComponentMenu("Blend Property/Physics/Interaction/Reset Objects")]
     public class BlendUdonResetObjects : UdonSharpBehaviour

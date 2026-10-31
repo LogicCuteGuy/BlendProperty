@@ -18,7 +18,6 @@ namespace BlendProperty.Udon
     /// Affects the cloths and fluids that list it in Force Fields and the Rigidbodies listed here.
     /// Move, rotate or animate the object to move the field. Turn the component off to stop it.
     /// </summary>
-    [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
     [Icon("Packages/com.logiccuteguy.blendproperty/Editor/Icons/Physics/ForceField.png")]
     [AddComponentMenu("Blend Property/Physics/Simulation/Force Field")]
     public class BlendUdonForceField : UdonSharpBehaviour

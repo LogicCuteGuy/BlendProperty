@@ -17,7 +17,6 @@ namespace BlendProperty.Udon
     /// surface wet (Blender Wetmap): wet areas darken and dry over Dry Time. Use ⋮ → Bake Dynamic Paint.
     /// The mesh needs non-overlapping UVs inside 0..1 (overlapping islands get the same paint). Local only (not synced).
     /// </summary>
-    [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
     [RequireComponent(typeof(MeshFilter))]
     [Icon("Packages/com.logiccuteguy.blendproperty/Editor/Icons/Physics/DynamicPaintCanvas.png")]
     [AddComponentMenu("Blend Property/Physics/Simulation/Dynamic Paint Canvas")]
@@ -173,7 +172,9 @@ namespace BlendProperty.Udon
                 }
             }
             bool wet = dryTime > 0f && wetDarkening > 0f;
-            if (n > 0) paintedUntil = now + Mathf.Max(dissolve, wet ? dryTime : 0f);
+            // keep updating a moment after the last stroke: the displayed canvas trails the paint layer by one update,
+            // so without these extra passes a one-shot stamp or a Clear stays invisible until something else is painted
+            if (n > 0 || clear) paintedUntil = now + Mathf.Max(Mathf.Max(dissolve, wet ? dryTime : 0f), 0.1f);
             // nothing touching, nothing fading or drying: the texture stays as it is and costs nothing
             if (n == 0 && !clear && now > paintedUntil) { lastUpdate = now; return; }
 

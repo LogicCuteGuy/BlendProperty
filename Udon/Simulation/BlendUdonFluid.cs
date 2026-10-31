@@ -21,7 +21,6 @@ namespace BlendProperty.Udon
     /// Draw it with the Blend Property/Smoke or Blend Property/Liquid material on the same Cube. Use ⋮ → Bake Fluid Domain.
     /// Udon only uploads settings, nothing is read back. Local only (not synced).
     /// </summary>
-    [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
     [Icon("Packages/com.logiccuteguy.blendproperty/Editor/Icons/Physics/FluidDomain.png")]
     [AddComponentMenu("Blend Property/Physics/Simulation/Fluid Domain")]
     public class BlendUdonFluid : UdonSharpBehaviour

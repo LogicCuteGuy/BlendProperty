@@ -22,7 +22,6 @@ namespace BlendProperty.Udon
     /// From your own Udon: <c>var d = GetComponent&lt;BlendUdonDeformStack&gt;(); int w = d.FindOp("Wave");
     /// d.SetFloat(w, "height", 1f);</c>. Field names are the modifier's (height, angle, strength...).
     /// </summary>
-    [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
     [RequireComponent(typeof(MeshFilter))]
     [Icon("Packages/com.logiccuteguy.blendproperty/Editor/Icons/Physics/GPUDeform.png")]
     [AddComponentMenu("")] // made at build from the Modifier Stack

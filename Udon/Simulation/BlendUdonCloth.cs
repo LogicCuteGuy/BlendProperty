@@ -25,7 +25,6 @@ namespace BlendProperty.Udon
     /// Colliders: Sphere, Capsule and Box (up to 8 each). The mesh shows the result one frame late.
     /// Use ⋮ → Bake Cloth after changing the mesh, pinning or Goal. One Blend Udon deformer per mesh.
     /// </summary>
-    [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
     [RequireComponent(typeof(MeshFilter))]
     [Icon("Packages/com.logiccuteguy.blendproperty/Editor/Icons/Physics/Cloth.png")]
     [AddComponentMenu("Blend Property/Physics/Simulation/Cloth")]

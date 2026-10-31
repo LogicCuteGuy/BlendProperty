@@ -15,7 +15,6 @@ namespace BlendProperty.Udon
     /// out with the shader's maths, using only the Max Waves biggest ones (small ripples don't move a floating object).
     /// Local only (not synced): kinematic bodies (held, or owned by someone else under VRC Object Sync) are skipped.
     /// </summary>
-    [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
     [Icon("Packages/com.logiccuteguy.blendproperty/Editor/Icons/Physics/Buoyancy.png")]
     [AddComponentMenu("Blend Property/Physics/Simulation/Ocean Buoyancy")]
     public class BlendUdonBuoyancy : UdonSharpBehaviour

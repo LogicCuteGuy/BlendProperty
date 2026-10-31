@@ -24,7 +24,6 @@ namespace BlendProperty.Udon
     /// shader works. The mesh needs enough vertices to show ripples and non-overlapping UVs inside 0..1.
     /// Use ⋮ → Bake Dynamic Waves. Local only (not synced). One Blend Udon deformer per mesh.
     /// </summary>
-    [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
     [RequireComponent(typeof(MeshFilter))]
     [Icon("Packages/com.logiccuteguy.blendproperty/Editor/Icons/Physics/DynamicWaves.png")]
     [AddComponentMenu("Blend Property/Physics/Simulation/Dynamic Waves")]

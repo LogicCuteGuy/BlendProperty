@@ -18,7 +18,6 @@ namespace BlendProperty.Udon
     /// Udon only sends a few settings a frame. Use ⋮ → Bake Hair after changing Number, Segments, Hair Length or the
     /// mesh. Local only (not synced).
     /// </summary>
-    [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
     [RequireComponent(typeof(MeshFilter))]
     [Icon("Packages/com.logiccuteguy.blendproperty/Editor/Icons/Physics/Hair.png")]
     [AddComponentMenu("Blend Property/Physics/Simulation/Hair")]

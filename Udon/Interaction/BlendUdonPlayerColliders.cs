@@ -17,7 +17,6 @@ namespace BlendProperty.Udon
     /// ones count only colliders near them). Turn parts on or off and size them below. Triggers, so they never push
     /// players or rigid bodies. The Body Template child and the Simulations list are filled in by the editor.
     /// </summary>
-    [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
     [DefaultExecutionOrder(-100)] // before the simulations read the colliders in PostLateUpdate
     [Icon("Packages/com.logiccuteguy.blendproperty/Editor/Icons/Physics/PlayerColliders.png")]
     [AddComponentMenu("Blend Property/Physics/Interaction/Player Colliders")]

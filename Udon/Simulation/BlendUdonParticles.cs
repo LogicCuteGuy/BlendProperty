@@ -25,7 +25,6 @@ namespace BlendProperty.Udon
     /// Move or animate this object to move the emitter. The inspector's Preview plays it in the Scene view. Changing
     /// Max Particles, Emit From, Render As or Instance Mesh rebakes. Local only (not synced): each player sees their own.
     /// </summary>
-    [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
     [Icon("Packages/com.logiccuteguy.blendproperty/Editor/Icons/Physics/Particles.png")]
     [AddComponentMenu("Blend Property/Physics/Simulation/Particle System")]
     public class BlendUdonParticles : UdonSharpBehaviour

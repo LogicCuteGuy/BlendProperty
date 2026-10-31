@@ -13,7 +13,6 @@ namespace BlendProperty.Udon
     /// slide on it and whether they die on it. Particles that list the collider use these; a collider without one
     /// bounces 0.3, friction 0.2, no kill. Can be changed at runtime.
     /// </summary>
-    [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
     [AddComponentMenu("Blend Property/Physics/Simulation/Collision")]
     public class BlendUdonCollision : UdonSharpBehaviour
     {
